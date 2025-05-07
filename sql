@@ -32,7 +32,41 @@ CREATE TABLE Musica (
     FOREIGN KEY (artista_id) REFERENCES Artista(id)
 );
 
--- Inserção de 5 usuários (1 admin e 4 comuns)
+
+CREATE TABLE Playlist (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    usuario_id INT NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id)
+);
+
+
+CREATE TABLE MusicaPlaylist (
+    id SERIAL PRIMARY KEY,
+    musica_id INT NOT NULL,
+    playlist_id INT NOT NULL,
+    ordem INT,  
+    FOREIGN KEY (musica_id) REFERENCES Musica(id),
+    FOREIGN KEY (playlist_id) REFERENCES Playlist(id),
+    UNIQUE (musica_id, playlist_id)  
+);
+
+CREATE TABLE Curtidas (
+    usuario_id INT NOT NULL,
+    musica_id INT NOT NULL,
+    PRIMARY KEY (usuario_id, musica_id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+    FOREIGN KEY (musica_id) REFERENCES Musica(id)
+);
+
+CREATE TABLE Descurtidas (
+    usuario_id INT NOT NULL,
+    musica_id INT NOT NULL,
+    PRIMARY KEY (usuario_id, musica_id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+    FOREIGN KEY (musica_id) REFERENCES Musica(id)
+);
 
 INSERT INTO Pessoa (nome, email, telefone) VALUES
 ('Carlos Silva', 'carlos@email.com', '999999999'),  -- ID 1
@@ -48,9 +82,7 @@ INSERT INTO Usuario (pessoa_id, username, senha, tipo_usuario) VALUES
 (4, 'ana_user', 'senha321', 'comum'),
 (5, 'lucas_user', 'senha654', 'comum');
 
--- Inserção de 42 artistas (Pessoa + Artista)
 
--- Inserção na tabela Pessoa (IDs de 6 a 47)
 INSERT INTO Pessoa (nome, email, telefone) VALUES
 ('Beyoncé', 'beyonce@email.com', '900000001'),
 ('The Weeknd', 'weeknd@email.com', '900000002'),
@@ -95,7 +127,6 @@ INSERT INTO Pessoa (nome, email, telefone) VALUES
 ('MC Mirella', 'mirella@email.com', '900000041'),
 ('MC Poze do Rodo', 'poze@email.com', '900000042');
 
--- Inserção na tabela Artista (IDs de 1 a 42)
 INSERT INTO Artista (pessoa_id, nome_artistico, genero) VALUES
 (6, 'Beyoncé', 'Pop'),
 (7, 'The Weeknd', 'R&B'),
@@ -140,7 +171,7 @@ INSERT INTO Artista (pessoa_id, nome_artistico, genero) VALUES
 (46, 'MC Mirella', 'Funk'),
 (47, 'MC Poze do Rodo', 'Funk');
 
--- Inserção de 50 músicas reais (com artista_id de 1 a 42)
+
 
 INSERT INTO Musica (titulo, artista_id, genero, lancamento) VALUES
 ('Halo', 1, 'Pop', '2008-01-01'),
@@ -190,3 +221,37 @@ INSERT INTO Musica (titulo, artista_id, genero, lancamento) VALUES
 ('Bang', 3, 'Pop', '2015-10-09'),
 ('Hotline Bling', 4, 'Hip Hop', '2015-07-31'),
 ('Rain On Me', 5, 'Pop', '2020-05-22');
+
+
+INSERT INTO Playlist (nome, usuario_id) VALUES
+('Playlist da Maria', 1),
+('Playlist do João', 2),
+('Playlist da Ana', 3),
+('Playlist do Lucas', 4);
+
+
+INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
+(9, 1, 1),
+(14, 1, 2),
+(31, 1, 3),
+(33, 1, 4);
+
+
+INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
+(27, 2, 1),
+(28, 2, 2),
+(29, 2, 3);
+
+
+INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
+(19, 3, 1),
+(20, 3, 2),
+(30, 3, 3),
+(31, 3, 4);
+
+
+INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
+(23, 4, 1),
+(24, 4, 2),
+(25, 4, 3),
+(39, 4, 4);
