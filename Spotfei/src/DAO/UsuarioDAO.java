@@ -34,15 +34,37 @@ public class UsuarioDAO {
     }
 
     
-    public void inserir(Usuario usuario) throws SQLException{
-        String sql = "insert into Usuario (nome, usuario, senha) values ('"
-                      + usuario.getNome()    + "', '"
-                      + usuario.getUsername() + "', '"
-                      + usuario.getSenha()   + "')";
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.execute();
-        conn.close();
+    public void inserirUsuarioePessoa(Usuario usuario) throws SQLException {
+    // Inserindo a pessoa na tabela do banco de dados
+    String sqlPessoa = "INSERT INTO pessoa (nome, email, telefone) "
+                        + "VALUES (?, ?, ?) RETURNING id";
+    PreparedStatement psPessoa = conn.prepareStatement(sqlPessoa);
+    psPessoa.setString(1, usuario.getNome());
+    psPessoa.setString(2, usuario.getEmail());
+    psPessoa.setString(3, usuario.getTelefone());
+
+    ResultSet rs = psPessoa.executeQuery();
+    int pessoaId = 0;
+    if (rs.next()) {
+        pessoaId = rs.getInt("id");
     }
+    rs.close();
+    psPessoa.close();
+    
+    // Inserindo o usuário na tabela do banco de dados
+    String sqlUsuario = "INSERT INTO usuario (pessoa_id, username, senha, "
+                        + "tipo_usuario) VALUES (?, ?, ?, ?)";
+    PreparedStatement psUsuario = conn.prepareStatement(sqlUsuario);
+    psUsuario.setInt(1, pessoaId);
+    psUsuario.setString(2, usuario.getUsername());
+    psUsuario.setString(3, usuario.getSenha()); 
+    psUsuario.setString(4, usuario.getTipoUsuario()); 
+
+    psUsuario.executeUpdate();
+    psUsuario.close();
+
+    conn.close();
+}
     
 
 }

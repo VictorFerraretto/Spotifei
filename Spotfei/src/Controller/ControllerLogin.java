@@ -31,7 +31,9 @@ public class ControllerLogin {
     
     
     if (username.isEmpty() || senha.isEmpty()) {
-        JOptionPane.showMessageDialog(view, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(view, "Por favor, "
+                                      + "preencha todos os campos.", "Erro", 
+                                      JOptionPane.ERROR_MESSAGE);
         return;
     }
     
