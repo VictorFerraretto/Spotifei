@@ -89,6 +89,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         bt_cadastre_se.setText("Cadastre-se");
+        bt_cadastre_se.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cadastre_seActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +154,13 @@ public class Login extends javax.swing.JFrame {
         c.loginUsuario();
         this.setVisible(false);
     }//GEN-LAST:event_bt_loginActionPerformed
+
+    private void bt_cadastre_seActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastre_seActionPerformed
+        // TODO add your handling code here:
+        Cadastro cf = new Cadastro();
+        cf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bt_cadastre_seActionPerformed
 
     /**
      * @param args the command line arguments
