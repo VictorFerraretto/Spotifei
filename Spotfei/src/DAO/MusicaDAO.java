@@ -21,7 +21,7 @@ public class MusicaDAO {
         this.conn = conn;
     }
 
-   public void inserirMusica(String titulo, String genero, 
+    public void inserirMusica(String titulo, String genero, 
             LocalDate dataLancamento, int artistaId) throws SQLException {
     String sql = "INSERT INTO Musica (titulo, artista_id, genero, lancamento) "
                  + "VALUES (?, ?, ?, ?)";
@@ -31,7 +31,47 @@ public class MusicaDAO {
     ms.setString(3, genero);         // terceiro o genero
     ms.setDate(4, java.sql.Date.valueOf(dataLancamento));  // quarto o lancamento
     ms.executeUpdate();
-}
+   }
+   
+    public String procurarMusica(String musica) throws SQLException{
+        StringBuilder resultado = new StringBuilder();
+        String sql = "SELECT \n" +
+                     "    m.id,\n" +
+                     "    m.titulo,\n" +
+                     "    a.nome_artistico AS artista,\n" +
+                     "    m.genero,\n" +
+                     "    m.lancamento\n" +
+                     "FROM \n" +
+                     "    Musica m\n" +
+                     "JOIN \n" +
+                     "    Artista a ON m.artista_id = a.id\n" +
+                     "WHERE m.titulo ILIKE ? OR " +
+                     "      a.nome_artistico ILIKE ? OR " +
+                     "      m.genero ILIKE ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                for (int i = 1; i <= 3; i++) {
+                    stmt.setString(i, "%" + musica + "%");
+                }
+
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    resultado.append("Título: "
+                              + "").append(rs.getString("titulo")).append("\n")
+                             .append("Artista: "
+                              + "").append(rs.getString("artista")).append("\n")
+                             .append("Gênero: "
+                             + "").append(rs.getString("genero")).append("\n")
+                             .append("Lançamento: "
+                             + "").append(rs.getDate("lancamento")).append("\n")
+                             .append("---------------------------\n");
+                }
+            }
+
+            return resultado.toString();
+    }
+
 }
     
 

@@ -34,7 +34,7 @@ public class ControllerLogin {
         JOptionPane.showMessageDialog(view, "Por favor, "
                                       + "preencha todos os campos.", "Erro", 
                                       JOptionPane.ERROR_MESSAGE);
-        return;
+        
     }
     
     
@@ -68,9 +68,7 @@ public class ControllerLogin {
             } else {
                 Home home = new Home();
                 home.setVisible(true);
-            }
-
-            
+            }           
             view.setVisible(false);
         } else {
            
