@@ -71,6 +71,20 @@ public class MusicaDAO {
 
             return resultado.toString();
     }
+    
+    public boolean excluirMusicaPorTitulo(String titulo) {
+    String sql = "DELETE FROM musica WHERE titulo ILIKE ?";
+
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, titulo);
+        int linhasAfetadas = stmt.executeUpdate();
+        return linhasAfetadas > 0;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
 
 }
     

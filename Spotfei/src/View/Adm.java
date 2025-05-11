@@ -107,6 +107,11 @@ public class Adm extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Excluir Musica");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setText("Cadastrar Artista");
@@ -192,6 +197,14 @@ public class Adm extends javax.swing.JFrame {
         cadastrarMusica.setVisible(true); // mostra a tela de cadastrar musica
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ExcluirMusica excluirmusica = new ExcluirMusica();
+        this.setVisible(false);
+        excluirmusica.setVisible(true);
+                
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
