@@ -4,13 +4,17 @@
  */
 package Controller;
 
+import DAO.ArtistaDAO;
 import DAO.UsuarioDAO;
 import DAO.Conexao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Model.Usuario;
+import Model.Artista;
+import View.CadastrarArtista;
 import View.Cadastro;
+import java.awt.HeadlessException;
 
 /**
  *
@@ -18,9 +22,14 @@ import View.Cadastro;
  */
 public class ControllerCadastro {
     private Cadastro view;
+    private CadastrarArtista view2;
     
     public ControllerCadastro(Cadastro view){
         this.view = view;
+    }
+    
+    public ControllerCadastro(CadastrarArtista view2){
+        this.view2 = view2;
     }
     
     public void cadastrarUsuario(){
@@ -51,5 +60,45 @@ public class ControllerCadastro {
                                         JOptionPane.ERROR_MESSAGE);
     }
     }
+    
+    public void cadastrarArtista(){
+    String nome = view2.getTxt_nome_artista().getText();
+    String nome_artistico = view2.getTxt_nome_artistico().getText();
+    String email = view2.getTxt_email_artista().getText();
+    String telefone = view2.getTxt_telefone_artista().getText();
+    String genero = view2.getTxt_genero_artista().getText();
+
+    if (nome.isEmpty() || nome_artistico.isEmpty() || email.isEmpty() ||
+        telefone.isEmpty() || genero.isEmpty()) {
+        JOptionPane.showMessageDialog(view, "Preencha todos os campos!", "Aviso",
+                                      JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // Conexão com o banco de dados e chamando o DAO
+        Conexao conexao = new Conexao();
+        ArtistaDAO artistaDAO = new ArtistaDAO(conexao.getConnection());
+
+        boolean sucesso = artistaDAO.inserirArtista(nome, nome_artistico, 
+                email, telefone, genero);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(view, "Artista "
+                    + "cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            // limpando os campos aqui
+        } else {
+            JOptionPane.showMessageDialog(view, "Erro: Já existe um artista "
+                    + "cadastrado com esse nome artístico.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (HeadlessException | SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(view, "Erro: " + e.getMessage(),
+                                      "Erro", JOptionPane.ERROR_MESSAGE);
+    }
 }
+        
+}
+
 

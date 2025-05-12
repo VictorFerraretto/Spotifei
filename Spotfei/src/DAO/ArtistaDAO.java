@@ -36,5 +36,67 @@ public class ArtistaDAO {
     stmt.setString(1, nomeArtistico);
     return stmt.executeQuery();
 }
+    public boolean inserirArtista(String nome, String nomeArtistico, 
+            String email, String telefone, String genero) {
+    String sqlPessoa = "INSERT INTO pessoa (nome, email, telefone) "
+            + "VALUES (?, ?, ?) RETURNING id";
+    String sqlArtista = "INSERT INTO artista (pessoa_id, "
+            + "nome_artistico, genero) VALUES (?, ?, ?)";
+    String sqlVerificaNomeArtistico = "SELECT id FROM artista WHERE nome_artistico = ?";
+
+    try {
+        // Verifica se o artista já existe no banco de dados
+        PreparedStatement stmtVerifica = conn.prepareStatement(sqlVerificaNomeArtistico);
+        stmtVerifica.setString(1, nomeArtistico);
+        ResultSet rs = stmtVerifica.executeQuery();
+
+        if (rs.next()) {
+            return false; // Já existe um artista com esse nome artístico
+        }
+
+        // Desliga o autocommit para transação segura
+        conn.setAutoCommit(false);
+
+        // Inserindo na tabela pessoa
+        PreparedStatement stmtPessoa = conn.prepareStatement(sqlPessoa);
+        stmtPessoa.setString(1, nome);
+        stmtPessoa.setString(2, email);
+        stmtPessoa.setString(3, telefone);
+        rs = stmtPessoa.executeQuery();
+
+        if (!rs.next()) {
+            conn.rollback();
+            return false; // Falha ao inserir pessoa
+        }
+
+        int pessoaId = rs.getInt("id");
+
+        // Inserindo na tabela artista
+        PreparedStatement stmtArtista = conn.prepareStatement(sqlArtista);
+        stmtArtista.setInt(1, pessoaId);
+        stmtArtista.setString(2, nomeArtistico);
+        stmtArtista.setString(3, genero);
+        stmtArtista.executeUpdate();
+
+        // Commit da transação
+        conn.commit();
+        return true;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        try {
+            conn.rollback(); // desfaz qualquer mudança se algum erro acontecer
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    } finally {
+        try {
+            conn.setAutoCommit(true); // restaura autocommit
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
     
 }
