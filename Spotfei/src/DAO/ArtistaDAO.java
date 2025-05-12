@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Model.Artista;
 
 /**
  *
@@ -66,7 +65,7 @@ public class ArtistaDAO {
 
         if (!rs.next()) {
             conn.rollback();
-            return false; // Falha ao inserir pessoa
+            return false; // Erro ao inserir pessoa
         }
 
         int pessoaId = rs.getInt("id");

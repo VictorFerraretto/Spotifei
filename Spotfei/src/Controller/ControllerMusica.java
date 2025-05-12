@@ -19,11 +19,13 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import View.VisualizarEstatisticas;
 
 public class ControllerMusica {
     private CadastrarMusica view;
     private BuscarMusica view2;
     private ExcluirMusica view3;
+    private VisualizarEstatisticas view4;
 
     public ControllerMusica(CadastrarMusica view) {
         this.view = view;
@@ -35,6 +37,10 @@ public class ControllerMusica {
 
     public ControllerMusica(ExcluirMusica view3) {
         this.view3 = view3;
+    }
+    
+    public ControllerMusica(VisualizarEstatisticas view4){
+        this.view4 = view4;
     }
 
     public void cadastrarMusica() {
@@ -141,4 +147,22 @@ public class ControllerMusica {
                     + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void mostrarTotalMusicas() {
+    try {
+        Conexao conexao = new Conexao();
+        MusicaDAO musicasDAO = new MusicaDAO(conexao.getConnection());
+
+        int total = musicasDAO.contarMusicas();
+
+        view4.getTxa_total_musicas().setText("Total "
+                + "de músicas: " + total);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(view, 
+                "Erro ao contar músicas: " + e.getMessage(),
+                                      "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+}
 }

@@ -9,6 +9,7 @@ import DAO.UsuarioDAO;
 import View.ConsultarUsuarios;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import View.VisualizarEstatisticas;
 
 /**
  *
@@ -18,9 +19,13 @@ import javax.swing.JOptionPane;
 // Novo Controller para ajudar com os usuarios
 public class ControllerUsuario {
     private ConsultarUsuarios view;
+    private VisualizarEstatisticas view2;
     
     public ControllerUsuario(ConsultarUsuarios view){
         this.view = view; 
+    }
+    public ControllerUsuario(VisualizarEstatisticas view2){
+        this.view2 = view2;
     }
     
     //metodo que busca os usuarios pelo nome
@@ -67,4 +72,22 @@ public class ControllerUsuario {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public void mostrarTotalUsuarios() {
+    try {
+        Conexao conexao = new Conexao();
+        UsuarioDAO usuarioDAO = new UsuarioDAO(conexao.getConnection());
+
+        int total = usuarioDAO.contarUsuarios();
+
+        view2.getTxa_total_usuarios().setText("Total de "
+                + "usuários: " + total);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(view, "Erro "
+                + "ao contar usuários: " + e.getMessage(),
+                                      "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+}
 }

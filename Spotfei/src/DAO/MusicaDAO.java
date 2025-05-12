@@ -85,6 +85,20 @@ public class MusicaDAO {
         e.printStackTrace();
         return false;
     }
+    }
+    
+    //outro metedo simples para contar o total de musicas no banco de dados
+    public int contarMusicas() {
+    String sql = "SELECT COUNT(id) AS total FROM musica";
+    try (PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+    } catch (SQLException e) { //tratamento para erro
+        e.printStackTrace();
+    }
+    return 0;
 }
 
 }

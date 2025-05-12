@@ -84,5 +84,21 @@ public class UsuarioDAO {
     stmt.setString(1, "%" + username + "%"); // busca parcial
     return stmt.executeQuery();
     }
+    
+    // metodo simples so para contar os usuarios
+    public int contarUsuarios() {
+    String sql = "SELECT COUNT(id) AS total FROM usuario";
+    try (PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+    
+    
 
 }
