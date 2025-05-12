@@ -29,6 +29,8 @@ public class ControllerLogin {
     String username = view.getTxt_usuario().getText();
     String senha = new String(view.getTxt_senha().getText());  
     
+    ControllerCurtidas cc = new ControllerCurtidas(username);
+    cc.fazerAlgoComUsername();
     
     if (username.isEmpty() || senha.isEmpty()) {
         JOptionPane.showMessageDialog(view, "Por favor, "

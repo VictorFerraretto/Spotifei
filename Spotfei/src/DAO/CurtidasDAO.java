@@ -46,6 +46,35 @@ public class CurtidasDAO {
     }
 
     return resultado;
-}
+    }
+    
+    public boolean Curtir(String nome, String titulo) throws SQLException{
+
+        String sql = "INSERT INTO Curtidas (usuario_id, musica_id) "
+                    + "SELECT u.id, m.id "
+                    + "FROM Usuario u "
+                    + "JOIN Pessoa p ON u.pessoa_id = p.id "
+                    + "JOIN Musica m ON m.titulo = ? "
+                    + "WHERE p.nome = ? "
+                    + "AND NOT EXISTS ("
+                    + "    SELECT 1 "
+                    + "    FROM Curtidas c "
+                    + "    WHERE c.usuario_id = u.id "
+                    + "    AND c.musica_id = m.id"
+                    + ");";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, titulo);
+            stmt.setString(2, nome);
+            
+        } catch (SQLException e) { //tratamento para erro
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+        
+               
+    }
+    
     
 }

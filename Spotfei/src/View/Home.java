@@ -27,18 +27,53 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        bt_buscar = new javax.swing.JButton();
+        bt_avaliacao = new javax.swing.JButton();
+        bt_buscar1 = new javax.swing.JButton();
+        bt_play = new javax.swing.JButton();
+        bt_play1 = new javax.swing.JButton();
+        bt_voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Spotifei");
 
-        bt_buscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        bt_buscar.setText("Buscar musica");
-        bt_buscar.addActionListener(new java.awt.event.ActionListener() {
+        bt_avaliacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bt_avaliacao.setText("Avaliação");
+        bt_avaliacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_buscarActionPerformed(evt);
+                bt_avaliacaoActionPerformed(evt);
+            }
+        });
+
+        bt_buscar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bt_buscar1.setText("Buscar musica");
+        bt_buscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_buscar1ActionPerformed(evt);
+            }
+        });
+
+        bt_play.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bt_play.setText("Gerenciar playlist");
+        bt_play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_playActionPerformed(evt);
+            }
+        });
+
+        bt_play1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bt_play1.setText(" Visualizar histórico");
+        bt_play1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_play1ActionPerformed(evt);
+            }
+        });
+
+        bt_voltar.setText("Voltar");
+        bt_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltarActionPerformed(evt);
             }
         });
 
@@ -47,12 +82,22 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(127, 127, 127))
+                .addGap(130, 130, 130))
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bt_play, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(bt_buscar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_avaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_play1))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -60,20 +105,48 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(bt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_avaliacao, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_play, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_play1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscarActionPerformed
+    private void bt_avaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_avaliacaoActionPerformed
         // TODO add your handling code here:
-        BuscarMusica bm = new BuscarMusica();
-        bm.setVisible(true);
+        Avalicao av = new Avalicao();
+        av.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_bt_buscarActionPerformed
+    }//GEN-LAST:event_bt_avaliacaoActionPerformed
+
+    private void bt_buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_buscar1ActionPerformed
+
+    private void bt_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_playActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_playActionPerformed
+
+    private void bt_play1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_play1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_play1ActionPerformed
+
+    private void bt_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_bt_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,7 +184,11 @@ public class Home extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_buscar;
+    private javax.swing.JButton bt_avaliacao;
+    private javax.swing.JButton bt_buscar1;
+    private javax.swing.JButton bt_play;
+    private javax.swing.JButton bt_play1;
+    private javax.swing.JButton bt_voltar;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
