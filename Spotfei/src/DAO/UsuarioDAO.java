@@ -65,6 +65,24 @@ public class UsuarioDAO {
 
     conn.close();
 }
+    // metodo para listar todos os usuarios
+    public ResultSet listaDeNomesDosUsuarios() throws SQLException{
+        String sql = "SELECT p.nome FROM Usuario u " +
+                "JOIN Pessoa p ON u.pessoa_id = p.id";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        return stmt.executeQuery();
+    }
     
+    //metodo para buscar as informações dos usuarios
+    public ResultSet buscarNomes(String username) throws SQLException{
+        String sql = "SELECT u.username, u.senha, u.tipo_usuario, p.nome, p.email, p.telefone " +
+                 "FROM Usuario u " +
+                 "JOIN Pessoa p ON u.pessoa_id = p.id " +
+                 "WHERE p.nome ILIKE ?";
+    
+    PreparedStatement stmt = conn.prepareStatement(sql);
+    stmt.setString(1, "%" + username + "%"); // busca parcial
+    return stmt.executeQuery();
+    }
 
 }

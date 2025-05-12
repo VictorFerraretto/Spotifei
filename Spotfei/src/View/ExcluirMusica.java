@@ -21,7 +21,7 @@ public class ExcluirMusica extends javax.swing.JFrame {
         initComponents();
         c = new ControllerMusica(this); 
     }
-
+    // metdodo de get e set 
     public JButton getBt_excluir() {
         return bt_excluir;
     }
@@ -131,11 +131,12 @@ public class ExcluirMusica extends javax.swing.JFrame {
         Adm adm = new Adm();
         adm.setVisible(true);
         
-        this.dispose(); // Fecha a janela do cadastro de musica
+        this.dispose(); // Fecha a janela
     }//GEN-LAST:event_bt_voltarActionPerformed
 
     private void bt_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_excluirActionPerformed
         // TODO add your handling code here:
+        //chama o metodo para excluir a musica do banco de dados 
         c.excluirMusica();
     }//GEN-LAST:event_bt_excluirActionPerformed
 
