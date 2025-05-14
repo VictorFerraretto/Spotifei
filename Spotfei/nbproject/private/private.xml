@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gustavo/Downloads/Spotifei-main/Spotfei/src/Controller/ControllerCadastro.java</file>
-            <file>file:/C:/Users/Gustavo/Downloads/Spotifei-main/Spotfei/src/DAO/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Gustavo/Downloads/Spotifei-main/Spotfei/src/View/Cadastro.java</file>
-            <file>file:/C:/Users/Gustavo/Downloads/Spotifei-main/Spotfei/src/Model/Usuario.java</file>
+            <file>file:/C:/Users/unifvnovais/Downloads/Spotifei-Victor-Curtir/Spotifei-Victor-Curtir/Spotfei/src/DAO/CurtidasDAO.java</file>
+            <file>file:/C:/Users/unifvnovais/Downloads/Spotifei-Victor-Curtir/Spotifei-Victor-Curtir/Spotfei/src/Controller/ControllerDescurtidas.java</file>
+            <file>file:/C:/Users/unifvnovais/Downloads/Spotifei-Victor-Curtir/Spotifei-Victor-Curtir/Spotfei/src/Controller/ControllerCurtidas.java</file>
+            <file>file:/C:/Users/unifvnovais/Downloads/Spotifei-Victor-Curtir/Spotifei-Victor-Curtir/Spotfei/src/DAO/DescurtidasDAO.java</file>
+            <file>file:/C:/Users/unifvnovais/Downloads/Spotifei-Victor-Curtir/Spotifei-Victor-Curtir/Spotfei/src/View/Avalicao.java</file>
         </group>
     </open-files>
 </project-private>

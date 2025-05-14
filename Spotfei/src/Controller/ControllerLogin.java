@@ -5,6 +5,7 @@
 package Controller;
 import DAO.UsuarioDAO;
 import DAO.Conexao;
+import Model.Sessao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class ControllerLogin {
     String username = view.getTxt_usuario().getText();
     String senha = new String(view.getTxt_senha().getText());  
     
-    
+   
     if (username.isEmpty() || senha.isEmpty()) {
         JOptionPane.showMessageDialog(view, "Por favor, "
                                       + "preencha todos os campos.", "Erro", 
@@ -60,8 +61,12 @@ public class ControllerLogin {
             
             JOptionPane.showMessageDialog(view, "Login efetuado!", "Aviso",
                                           JOptionPane.INFORMATION_MESSAGE);
+          
+            // Salva o usuário logado na Sessão
+            Sessao.getInstancia().setUsuarioLogado(usuario);
 
-            
+            JOptionPane.showMessageDialog(view, "Login efetuado!", "Aviso",
+                                          JOptionPane.INFORMATION_MESSAGE);
             if ("admin".equalsIgnoreCase(tipoUsuario)) {
                 Adm adm = new Adm();
                 adm.setVisible(true);

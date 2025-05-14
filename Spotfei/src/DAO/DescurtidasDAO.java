@@ -46,5 +46,28 @@ public class DescurtidasDAO {
     }
 
     return resultado;
-}
+    }
+    
+    public boolean Descurtir(int idUsuario, String nomeMusica) throws SQLException {
+    String sqlBusca = "SELECT id FROM musica WHERE titulo = ?";
+    String sqlLike = "INSERT INTO Descurtidas (usuario_id, musica_id) VALUES (?, ?)";
+
+    try (PreparedStatement stmtBusca = conn.prepareStatement(sqlBusca)) {
+        stmtBusca.setString(1, nomeMusica);
+        ResultSet rs = stmtBusca.executeQuery();
+
+        if (rs.next()) {
+            int idMusica = rs.getInt("id");
+
+            try (PreparedStatement stmtLike = conn.prepareStatement(sqlLike)) {
+                stmtLike.setInt(1, idUsuario);
+                stmtLike.setInt(2, idMusica);
+                stmtLike.executeUpdate();
+                return true;
+            }
+        } else {
+            return false; // Música não encontrada
+        }
+    }
+    }
 }
