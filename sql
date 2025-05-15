@@ -52,6 +52,16 @@ CREATE TABLE MusicaPlaylist (
     UNIQUE (musica_id, playlist_id)  
 );
 
+CREATE TABLE HistoricoBuscas (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    musica_id INT NOT NULL,
+    data_busca TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+    FOREIGN KEY (musica_id) REFERENCES Musica(id)
+);
+
+
 CREATE TABLE Curtidas (
     usuario_id INT NOT NULL,
     musica_id INT NOT NULL,
