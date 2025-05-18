@@ -234,10 +234,10 @@ INSERT INTO Musica (titulo, artista_id, genero, lancamento) VALUES
 
 
 INSERT INTO Playlist (nome, usuario_id) VALUES
-('Playlist da Maria', 1),
-('Playlist do João', 2),
-('Playlist da Ana', 3),
-('Playlist do Lucas', 4);
+('Playlist da Maria', 2),
+('Playlist do João', 3),
+('Playlist da Ana', 4),
+('Playlist do Lucas', 5);
 
 
 INSERT INTO MusicaPlaylist (musica_id, playlist_id) VALUES
