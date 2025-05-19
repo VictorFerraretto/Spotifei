@@ -8,7 +8,7 @@ package Model;
  *
  * @author Victor
  */
-public class Usuario extends Pessoa {
+public class Usuario extends Pessoa implements Autentificacao{
     private String username, senha, tipoUsuario;
 
     public Usuario() {
@@ -30,9 +30,6 @@ public class Usuario extends Pessoa {
         this.username = username;
     }
         
-      
-    
-
     public String getSenha() {
         return senha;
     }
@@ -46,7 +43,14 @@ public class Usuario extends Pessoa {
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
-   
-    
+
+     @Override
+    public boolean autenticar() {
+            System.out.println("Usuario: " + this.getNome());
+            System.out.println("Tipo do usuario: " + this.tipoUsuario);
+            return true;
+
+    }
     
 }
+
