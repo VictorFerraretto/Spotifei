@@ -73,8 +73,7 @@ public class MusicaDAO {
 
             return resultado.toString();
     }
-    
-     
+       
     //metodo que exclui a musica sem excluir o artista junto
     public boolean excluirMusicaPorTitulo(String titulo) {
         String sql = "DELETE FROM musica WHERE titulo ILIKE ?";
@@ -105,7 +104,7 @@ public class MusicaDAO {
     }
     
     
-    public List<Musica> buscarMusicasParaHistorico(String titulo) throws SQLException {
+    public List<Musica> procurarMusicasParaHistorico(String titulo) throws SQLException {
         List<Musica> musicas = new ArrayList<>();
 
         String sql = "SELECT m.id, m.titulo, m.genero, m.lancamento, a.nome_artistico AS artista " +
@@ -131,7 +130,7 @@ public class MusicaDAO {
 
         return musicas;
     }
-    
+ 
 }
     
 

@@ -1,4 +1,5 @@
 
+
 CREATE TABLE Pessoa (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -45,8 +46,7 @@ CREATE TABLE Playlist (
 CREATE TABLE MusicaPlaylist (
     id SERIAL PRIMARY KEY,
     musica_id INT NOT NULL,
-    playlist_id INT NOT NULL,
-    ordem INT,  
+    playlist_id INT NOT NULL, 
     FOREIGN KEY (musica_id) REFERENCES Musica(id),
     FOREIGN KEY (playlist_id) REFERENCES Playlist(id),
     UNIQUE (musica_id, playlist_id)  
@@ -234,34 +234,25 @@ INSERT INTO Musica (titulo, artista_id, genero, lancamento) VALUES
 
 
 INSERT INTO Playlist (nome, usuario_id) VALUES
-('Playlist da Maria', 1),
-('Playlist do João', 2),
-('Playlist da Ana', 3),
-('Playlist do Lucas', 4);
+('Playlist da Maria', 2),
+('Playlist do João', 3),
+('Playlist da Ana', 4),
+('Playlist do Lucas', 5);
 
 
-INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
-(9, 1, 1),
-(14, 1, 2),
-(31, 1, 3),
-(33, 1, 4);
-
-
-INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
-(27, 2, 1),
-(28, 2, 2),
-(29, 2, 3);
-
-
-INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
-(19, 3, 1),
-(20, 3, 2),
-(30, 3, 3),
-(31, 3, 4);
-
-
-INSERT INTO MusicaPlaylist (musica_id, playlist_id, ordem) VALUES
-(23, 4, 1),
-(24, 4, 2),
-(25, 4, 3),
-(39, 4, 4);
+INSERT INTO MusicaPlaylist (musica_id, playlist_id) VALUES
+(9, 1),
+(14, 1),
+(31, 1),
+(33, 1),
+(27, 2),
+(28, 2),
+(29, 2),
+(19, 3),
+(20, 3),
+(30, 3),
+(31, 3),
+(23, 4),
+(24, 4),
+(25, 4),
+(39, 4);

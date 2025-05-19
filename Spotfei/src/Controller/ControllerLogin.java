@@ -27,62 +27,62 @@ public class ControllerLogin {
     
     public void loginUsuario() {
     
-    String username = view.getTxt_usuario().getText();
-    String senha = new String(view.getTxt_senha().getText());  
-    
-   
-    if (username.isEmpty() || senha.isEmpty()) {
-        JOptionPane.showMessageDialog(view, "Por favor, "
-                                      + "preencha todos os campos.", "Erro", 
-                                      JOptionPane.ERROR_MESSAGE);
-        
-    }
-    
-    
-    Conexao conexao = new Conexao();
-    
-    try (Connection conn = conexao.getConnection()) {
-        
-        UsuarioDAO dao = new UsuarioDAO(conn);
-        ResultSet res = dao.consultarPorUsernameESenha(username, senha);
+        String username = view.getTxt_usuario().getText();
+        String senha = new String(view.getTxt_senha().getText());  
 
-        
-        if (res.next()) {
-            
-            int id = res.getInt("id");
-            String nome = res.getString("nome");
-            String email = res.getString("email");
-            String telefone = res.getString("telefone");
-            String tipoUsuario = res.getString("tipo_usuario");
 
-            
-            Usuario usuario = new Usuario(username, senha, tipoUsuario, id, nome, email, telefone);
- 
-            // Salva o usuário logado na Sessão
-            Sessao.getInstancia().setUsuarioLogado(usuario);
-
-            JOptionPane.showMessageDialog(view, "Login efetuado!", "Aviso",
-                                          JOptionPane.INFORMATION_MESSAGE);
-            if ("admin".equalsIgnoreCase(tipoUsuario)) {
-                Adm adm = new Adm();
-                adm.setVisible(true);
-            } else {
-                Home home = new Home();
-                home.setVisible(true);
-            }           
-            view.setVisible(false);
-        } else {
-           
-            JOptionPane.showMessageDialog(view, "Login NÃO efetuado!", "Aviso",
+        if (username.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Por favor, "
+                                          + "preencha todos os campos.", "Erro", 
                                           JOptionPane.ERROR_MESSAGE);
+
         }
 
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(view, "Erro de conexão: "
-                                      + e.getMessage(), "Aviso",
-                                      JOptionPane.ERROR_MESSAGE);
+
+        Conexao conexao = new Conexao();
+
+        try (Connection conn = conexao.getConnection()) {
+
+            UsuarioDAO dao = new UsuarioDAO(conn);
+            ResultSet res = dao.consultarPorUsernameESenha(username, senha);
+
+
+            if (res.next()) {
+
+                int id = res.getInt("id");
+                String nome = res.getString("nome");
+                String email = res.getString("email");
+                String telefone = res.getString("telefone");
+                String tipoUsuario = res.getString("tipo_usuario");
+
+
+                Usuario usuario = new Usuario(username, senha, tipoUsuario, id, nome, email, telefone);
+
+                // Salva o usuário logado na Sessão
+                Sessao.getInstancia().setUsuarioLogado(usuario);
+
+                JOptionPane.showMessageDialog(view, "Login efetuado!", "Aviso",
+                                              JOptionPane.INFORMATION_MESSAGE);
+                if ("admin".equalsIgnoreCase(tipoUsuario)) {
+                    Adm adm = new Adm();
+                    adm.setVisible(true);
+                } else {
+                    Home home = new Home();
+                    home.setVisible(true);
+                }           
+                view.setVisible(false);
+            } else {
+
+                JOptionPane.showMessageDialog(view, "Login NÃO efetuado!", "Aviso",
+                                              JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(view, "Erro de conexão: "
+                                          + e.getMessage(), "Aviso",
+                                          JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
 
         
 }       

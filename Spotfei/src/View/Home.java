@@ -4,6 +4,8 @@
  */
 package View;
 
+import Controller.ControllerPlaylist;
+
 /**
  *
  * @author Victor
@@ -81,10 +83,6 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(130, 130, 130))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -96,8 +94,13 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(bt_play1))
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,6 +141,11 @@ public class Home extends javax.swing.JFrame {
 
     private void bt_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_playActionPerformed
         // TODO add your handling code here:
+        Playlist play = new Playlist();
+        play.setVisible(true);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_bt_playActionPerformed
 
     private void bt_play1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_play1ActionPerformed
@@ -190,7 +198,7 @@ public class Home extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
+private ControllerPlaylist c;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_avaliacao;
     private javax.swing.JButton bt_buscar1;

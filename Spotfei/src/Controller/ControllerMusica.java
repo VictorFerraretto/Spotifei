@@ -122,7 +122,7 @@ public class ControllerMusica {
             }
             Usuario usuarioLogado = Sessao.getInstancia().getUsuarioLogado();
             if (usuarioLogado != null) {
-                List<Musica> musicas = musicaDAO.buscarMusicasParaHistorico(musica);
+                List<Musica> musicas = musicaDAO.procurarMusicasParaHistorico(musica);
                 for (Musica m : musicas) {
                     historicoDAO.adicionarBusca(usuarioLogado.getId(), m.getId());
                 }
