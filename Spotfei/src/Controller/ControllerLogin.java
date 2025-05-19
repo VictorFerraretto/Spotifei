@@ -5,6 +5,7 @@
 package Controller;
 import DAO.UsuarioDAO;
 import DAO.Conexao;
+import Model.Autentificacao;
 import Model.Sessao;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +29,7 @@ public class ControllerLogin {
     public void loginUsuario() {
     
         String username = view.getTxt_usuario().getText();
-        String senha = new String(view.getTxt_senha().getText());  
+        String senha = view.getTxt_senha().getText();  
 
 
         if (username.isEmpty() || senha.isEmpty()) {
@@ -56,9 +57,11 @@ public class ControllerLogin {
                 String tipoUsuario = res.getString("tipo_usuario");
 
 
-                Usuario usuario = new Usuario(username, senha, tipoUsuario, id, nome, email, telefone);
-
-                // Salva o usuário logado na Sessão
+                Usuario usuario = new Usuario(username, senha, tipoUsuario, 
+                                                id, nome, email, telefone);
+                
+                if(usuario.autenticar()){
+                 // Salva o usuário logado na Sessão
                 Sessao.getInstancia().setUsuarioLogado(usuario);
 
                 JOptionPane.showMessageDialog(view, "Login efetuado!", "Aviso",
@@ -71,6 +74,7 @@ public class ControllerLogin {
                     home.setVisible(true);
                 }           
                 view.setVisible(false);
+                }
             } else {
 
                 JOptionPane.showMessageDialog(view, "Login NÃO efetuado!", "Aviso",
@@ -83,7 +87,7 @@ public class ControllerLogin {
                                           JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
         
 }       
 
