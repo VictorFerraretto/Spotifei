@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * @author Gustavo
  */
 public class ControllerDescurtidas {
-    
+    // linkando com  as interfaces
     private VisualizarEstatisticas view;
     private Historico view2;
     private Avalicao view3;
@@ -59,7 +59,7 @@ public class ControllerDescurtidas {
                 "Erro", JOptionPane.ERROR_MESSAGE);
     }
     }
-    
+    // mesmo metodo usada na curtidas, mas agora para descurtidas
     public void AdicionarMusicaDescurtida() {
         String nomeMusica = view3.getTxt_nome_musica().getText();
 
@@ -103,7 +103,7 @@ public class ControllerDescurtidas {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    // metodo que mostra a musica descurtida pelo usuario
     public void mostrarMusicasDescurtidasPeloUsuario() {
         Usuario usuarioLogado = Sessao.getInstancia().getUsuarioLogado();
 
