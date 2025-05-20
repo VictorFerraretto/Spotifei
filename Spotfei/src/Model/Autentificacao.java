@@ -9,5 +9,6 @@ package Model;
  * @author unifgcheida
  */
 public interface Autentificacao {
+    // interface de autentificacao do projeto
     boolean autenticar();
 }
