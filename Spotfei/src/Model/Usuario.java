@@ -13,7 +13,7 @@ public class Usuario extends Pessoa implements Autentificacao{
 
     public Usuario() {
     }
-
+    // construtor para o usuario
     public Usuario(String username, String senha, String tipoUsuario, 
                    int id, String nome, String email, String telefone) {
         super(id, nome, email, telefone);
@@ -44,6 +44,7 @@ public class Usuario extends Pessoa implements Autentificacao{
         this.tipoUsuario = tipoUsuario;
     }
 
+    // implementação da classe de autentificação
      @Override
     public boolean autenticar() {
             System.out.println("Usuario: " + this.getNome());
