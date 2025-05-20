@@ -14,7 +14,7 @@ public class Pessoa {
 
     public Pessoa() {
     }
-
+    // construtor para o pessoa
     public Pessoa(int id, String nome, String email, String telefone) {
         this.id = id;
         this.nome = nome;
