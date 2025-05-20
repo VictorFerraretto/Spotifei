@@ -10,6 +10,7 @@ import View.Login;
  *
  * @author Victor
  */
+// aqui é aonde o programa vai rodar
 public class Spotfei {
 
     /**
