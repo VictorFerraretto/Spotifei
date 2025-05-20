@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author Gustavo
  */
 public class DescurtidasDAO {
-    
+    //conexao com o banco de dados
     private Connection conn;
 
     public DescurtidasDAO(Connection conn) {
@@ -47,7 +47,7 @@ public class DescurtidasDAO {
 
     return resultado;
     }
-    
+    //mesmo metodo que no curtir as musicas
     public boolean Descurtir(int idUsuario, String nomeMusica) throws SQLException {
     String sqlBusca = "SELECT id FROM musica WHERE titulo = ?";
     String sqlLike = "INSERT INTO Descurtidas (usuario_id, musica_id) VALUES (?, ?)";
@@ -70,7 +70,7 @@ public class DescurtidasDAO {
         }
     }
     }
-    
+    //mesmo metodo que no buscar musicas curtidas pelo usuario_id
     public String buscarMusicasDescurtidaPeloUsuario(int usuarioId) throws SQLException {
     StringBuilder resultado = new StringBuilder();
     String sql = "SELECT " +
