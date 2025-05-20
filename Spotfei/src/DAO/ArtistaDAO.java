@@ -14,7 +14,8 @@ import java.sql.SQLException;
  * @author Gustavo
  */
 public class ArtistaDAO {
-    
+
+    // criação da conexão comm o banco de dados
     private Connection conn;
 
     public ArtistaDAO(Connection conn) {
@@ -35,6 +36,7 @@ public class ArtistaDAO {
     stmt.setString(1, nomeArtistico);
     return stmt.executeQuery();
 }
+    //metodo para inseriri o artista no banco de dados
     public boolean inserirArtista(String nome, String nomeArtistico, 
             String email, String telefone, String genero) {
     String sqlPessoa = "INSERT INTO pessoa (nome, email, telefone) "
