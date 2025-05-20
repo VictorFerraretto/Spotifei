@@ -10,6 +10,7 @@ package Controller;
  * @author Gustavo
  */
 
+// todos os importes necessarios 
 import DAO.Conexao;
 import DAO.HistoricoDAO;
 import DAO.MusicaDAO;
@@ -28,6 +29,7 @@ import View.VisualizarEstatisticas;
 import java.util.List;
 
 public class ControllerMusica {
+    //linkando com as interfaces
     private CadastrarMusica view;
     private BuscarMusica view2;
     private ExcluirMusica view3;
@@ -52,7 +54,7 @@ public class ControllerMusica {
     public ControllerMusica(Historico view5){
         this.view5 = view5;
     }
-    
+    // cadastrando musicas nop banco
     public void cadastrarMusica() {
         String titulo = view.getTxt_titulo_musica().getText();
         String genero = view.getTxt_genero_musica().getText();
@@ -69,6 +71,7 @@ public class ControllerMusica {
 
         try {
             Conexao conexao = new Conexao();
+            // seleciona o artista pelo nome
             String sqlBuscaArtista = "SELECT id FROM Artista WHERE "
                                     + "nome_artistico = ?";
             PreparedStatement stmtBusca = conexao.getConnection().
@@ -99,7 +102,7 @@ public class ControllerMusica {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    // buscando musicas
     public void buscarMusica() {
         String musica = view2.getTxt_buscar().getText();
 
@@ -133,7 +136,7 @@ public class ControllerMusica {
                     + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    // excluindo musica pelo titulo 
     public void excluirMusica() {
         String titulo = view3.getTxt_excluir_musica().getText();
 
@@ -164,7 +167,7 @@ public class ControllerMusica {
                     + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    // molstra o total de musicas no banco
     public void mostrarTotalMusicas() {
         try {
             Conexao conexao = new Conexao();
@@ -182,7 +185,7 @@ public class ControllerMusica {
                                           "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    // mostra o historico de buscas do usuario
     public void mostrarHistoricoBuscas() {
         Usuario usuarioLogado = Sessao.getInstancia().getUsuarioLogado();
         if (usuarioLogado == null) {
