@@ -19,7 +19,7 @@ import View.Historico;
  * @author Gustavo
  */
 public class ControllerCurtidas {
-    
+    // linkando com as interfaces que vao usar as funções
     private VisualizarEstatisticas view;
     private Historico view2;
     private Avalicao view3;
@@ -59,6 +59,7 @@ public class ControllerCurtidas {
                                           "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    //metodo para adicionar a musica em Curtidas
     public void AdicionarMusicaCurtida() {
         String nomeMusica = view3.getTxt_nome_musica().getText();
 
@@ -70,7 +71,7 @@ public class ControllerCurtidas {
                 "Usuário não está logado.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        // pega o id do usuario
         int idUsuario = usuarioLogado.getId();
 
         if (nomeMusica.isEmpty()) {
@@ -102,7 +103,7 @@ public class ControllerCurtidas {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    // mostra as musicas curtidas do usuario
     public void mostrarMusicasCurtidasPeloUsuario() {
         Usuario usuarioLogado = Sessao.getInstancia().getUsuarioLogado();
 
