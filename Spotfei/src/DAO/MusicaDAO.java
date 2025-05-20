@@ -17,13 +17,12 @@ import java.util.List;
  * @author Gustavo
  */
 public class MusicaDAO {
-    //conexao com o bando de dados
     private Connection conn;
 
     public MusicaDAO(Connection conn) {
         this.conn = conn;
     }
-    //inserindo as musicas na tabela de Musicas do banco
+
     public void inserirMusica(String titulo, String genero, 
         LocalDate dataLancamento, int artistaId) throws SQLException {
         String sql = "INSERT INTO Musica (titulo, artista_id, genero, lancamento) "
@@ -34,8 +33,15 @@ public class MusicaDAO {
         ms.setString(3, genero);         // terceiro o genero
         ms.setDate(4, java.sql.Date.valueOf(dataLancamento));  // quarto o lancamento
         ms.executeUpdate();
-   }
-   // procurando as musicas
+    }
+   
+    public ResultSet buscarArtista(String nome_artista) throws SQLException {
+        String sqlBuscaArtista = "SELECT id FROM Artista WHERE nome_artistico = ?";
+        PreparedStatement stmtBusca = conn.prepareStatement(sqlBuscaArtista);
+        stmtBusca.setString(1, nome_artista);
+        return stmtBusca.executeQuery();
+    }
+    
     public String procurarMusica(String musica) throws SQLException{
         StringBuilder resultado = new StringBuilder();
         String sql = "SELECT \n" +
@@ -77,15 +83,62 @@ public class MusicaDAO {
        
     //metodo que exclui a musica sem excluir o artista junto
     public boolean excluirMusicaPorTitulo(String titulo) {
-        String sql = "DELETE FROM musica WHERE titulo ILIKE ?";
+        String buscarMusicaSql = "SELECT id FROM Musica WHERE titulo ILIKE ?";
+        String excluirHistoricoSql = "DELETE FROM HistoricoBuscas WHERE musica_id = ?";
+        String excluirMusicaPlaylistSql = "DELETE FROM MusicaPlaylist "
+                                        + "WHERE musica_id = ?";
+        String excluirCurtidaSql = "DELETE FROM Curtidas WHERE musica_id = ?";
+        String excluirDescurtidaSql = "DELETE FROM Descurtidas WHERE musica_id = ?";
+        String excluirMusicaSql = "DELETE FROM Musica WHERE id = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, titulo);
-            int linhasAfetadas = stmt.executeUpdate();
-            return linhasAfetadas > 0;
+        try (
+            PreparedStatement buscarStmt = conn.prepareStatement(buscarMusicaSql)
+        ) {
+            buscarStmt.setString(1, titulo);
+            ResultSet rs = buscarStmt.executeQuery();
 
-        } catch (SQLException e) { //tratamento para erro
-            e.printStackTrace();
+            if (rs.next()) {
+                int musicaId = rs.getInt("id");
+
+                // exclui do Historico
+                try (PreparedStatement excluirHist = conn.prepareStatement
+                    (excluirHistoricoSql)) {
+                    excluirHist.setInt(1, musicaId);
+                    excluirHist.executeUpdate();
+                }
+
+                // exclui de MusicaPlaylist
+                try (PreparedStatement excluirMP = conn.prepareStatement
+                    (excluirMusicaPlaylistSql)) {
+                    excluirMP.setInt(1, musicaId);
+                    excluirMP.executeUpdate();
+                }
+                // excluir de Curtida
+                try (PreparedStatement stmt = conn.prepareStatement(excluirCurtidaSql)) {
+                    stmt.setInt(1, musicaId);
+                    stmt.executeUpdate();
+                }
+
+                // excluir de Descurtida
+                try (PreparedStatement stmt = conn.prepareStatement(excluirDescurtidaSql)) {
+                    stmt.setInt(1, musicaId);
+                    stmt.executeUpdate();
+                }
+                // excluir de Musica
+                try (PreparedStatement excluirMusica = conn.prepareStatement
+                    (excluirMusicaSql)) {
+                    excluirMusica.setInt(1, musicaId);
+                    int linhasAfetadas = excluirMusica.executeUpdate();
+                    return linhasAfetadas > 0;
+                }
+
+            } else {
+                System.out.println("Música não encontrada.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir música: " + e.getMessage());
             return false;
         }
     }
@@ -104,7 +157,7 @@ public class MusicaDAO {
         return 0;
     }
     
-    // usei o list aqui tbm
+    
     public List<Musica> procurarMusicasParaHistorico(String titulo) throws SQLException {
         List<Musica> musicas = new ArrayList<>();
 
