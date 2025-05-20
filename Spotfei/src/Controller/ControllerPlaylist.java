@@ -19,13 +19,13 @@ import javax.swing.JOptionPane;
  * @author unifvnovais
  */
 public class ControllerPlaylist {
-    
+    // linkando com a interface
     private Playlist view;
 
     public ControllerPlaylist(Playlist view) {
         this.view = view;
     }
-    
+    // inserindo a playlist no banco de dados
     public void inserirPlaylist() {
         String nomePlay = view.getTxt_playlist().getText();
 
@@ -46,7 +46,7 @@ public class ControllerPlaylist {
             JOptionPane.showMessageDialog(view, "Erro ao inserir Playlist: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }  
     }
-    
+    // deletando a playlist
     public void deletarPlaylist() {
         String nomePlay = view.getTxt_playlist().getText();
 
@@ -67,7 +67,7 @@ public class ControllerPlaylist {
             JOptionPane.showMessageDialog(view, "Erro ao deletar Playlist: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }  
     }
-    
+    // procurando a playlist do usuario
     public void procurarPlaylist(){
         try {
         Conexao conexao = new Conexao();
@@ -82,7 +82,7 @@ public class ControllerPlaylist {
         } 
 
     } 
-    
+    // adicionando musicas na playlist que o usuario deseja
     public void adicionarMusicaNaPlaylist() {
         String nomePlay = view.getTxt_playAddMusica().getText();
         String tituloMusica = view.getTxt_addMusica().getText();
@@ -103,7 +103,7 @@ public class ControllerPlaylist {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar música na playlist: " + e.getMessage());
         }
     }
-    
+    // removendo a musica da playlist do usuario
     public void removerMusicaDaPlaylist() {
         String nomePlay = view.getTxt_playAddMusica().getText();
         String tituloMusica = view.getTxt_addMusica().getText();
@@ -129,7 +129,7 @@ public class ControllerPlaylist {
             JOptionPane.showMessageDialog(null, "Erro ao remover música da playlist: " + e.getMessage());
         }
     }
-    
+    // renomeando o nome da playlist que o usuario desejar
     public void renomearPlaylist() {
         String nomeAntigo = view.getTxt_playEditar().getText();
         String novoNome = view.getTxt_novoNome().getText();
