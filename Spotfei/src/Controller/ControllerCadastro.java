@@ -20,6 +20,7 @@ import java.awt.HeadlessException;
  * @author Gustavo
  */
 public class ControllerCadastro {
+    // linkando com a interface que usará as funções
     private Cadastro view;
     private CadastrarArtista view2;
     
@@ -30,7 +31,7 @@ public class ControllerCadastro {
     public ControllerCadastro(CadastrarArtista view2){
         this.view2 = view2;
     }
-    
+    // metodo para cadastrar um novo usuario
     public void cadastrarUsuario(){
     String nome = view.getTxt_nome_cadastro().getText();
     String username = view.getTxt_username_cadastro().getText();
@@ -59,7 +60,7 @@ public class ControllerCadastro {
                                         JOptionPane.ERROR_MESSAGE);
     }
     }
-    
+    // metodo para cadastrar um novo artista no bando de dados
     public void cadastrarArtista(){
     String nome = view2.getTxt_nome_artista().getText();
     String nome_artistico = view2.getTxt_nome_artistico().getText();
