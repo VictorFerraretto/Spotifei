@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author Gustavo
  */
 public class CurtidasDAO {
-    
+    // conexao com o banco de dados
     private Connection conn;
 
     public CurtidasDAO(Connection conn) {
@@ -25,6 +25,7 @@ public class CurtidasDAO {
     }
     
     // importei o List para me ajudar aqui
+    //metodo que seleciona e soma as musicas curtidas
     public List<String> Curtidas() {
     String sql = "SELECT m.titulo, COUNT(c.musica_id) AS curtidas " +
                  "FROM curtidas c " +
@@ -48,7 +49,7 @@ public class CurtidasDAO {
 
     return resultado;
     }
-    
+    // seleciona e insere na tabela Curtidas as musicas curtidas pelos usuarios
     public boolean Curtir(int idUsuario, String nomeMusica) throws SQLException {
     String sqlBusca = "SELECT id FROM musica WHERE titulo = ?";
     String sqlLike = "INSERT INTO Curtidas (usuario_id, musica_id) VALUES (?, ?)";
@@ -71,6 +72,7 @@ public class CurtidasDAO {
         }
     }
     }
+    //metodo que busca a musica pelo usuario_id
     public String buscarMusicasCurtidasPeloUsuario(int usuarioId) throws SQLException {
     StringBuilder resultado = new StringBuilder();
     String sql = "SELECT " +
