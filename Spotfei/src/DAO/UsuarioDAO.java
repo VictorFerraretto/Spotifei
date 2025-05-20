@@ -15,12 +15,13 @@ import Model.Usuario;
  * @author Victor
  */
 public class UsuarioDAO {
+    //conexao com o banco de dados
     private Connection conn;
 
     public UsuarioDAO(Connection conn) {
         this.conn = conn;        
     }
-
+    // consultar no banco se tem o usuario
     public ResultSet consultarPorUsernameESenha(String username, String senha) throws SQLException {
         String sql = "SELECT u.id, u.username, u.senha, p.nome, p.email, p.telefone, u.tipo_usuario "
                    + "FROM Usuario u "
@@ -35,7 +36,7 @@ public class UsuarioDAO {
 
     
     public void inserirUsuarioePessoa(Usuario usuario) throws SQLException {
-    // Inserindo a pessoa na tabela do banco de dados
+    // inserindo a pessoa na tabela do banco de dados
     String sqlPessoa = "INSERT INTO pessoa (nome, email, telefone) "
                         + "VALUES (?, ?, ?) RETURNING id";
     PreparedStatement psPessoa = conn.prepareStatement(sqlPessoa);
@@ -51,7 +52,7 @@ public class UsuarioDAO {
     rs.close();
     psPessoa.close();
     
-    // Inserindo o usuário na tabela do banco de dados
+    // inserindo o usuário na tabela do banco de dados
     String sqlUsuario = "INSERT INTO usuario (pessoa_id, username, senha, "
                         + "tipo_usuario) VALUES (?, ?, ?, ?)";
     PreparedStatement psUsuario = conn.prepareStatement(sqlUsuario);
