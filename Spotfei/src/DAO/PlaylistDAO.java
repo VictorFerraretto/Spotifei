@@ -14,12 +14,13 @@ import java.sql.SQLException;
  * @author unifvnovais
  */
 public class PlaylistDAO {
+    // conexao com o banco
     private Connection conn;
 
     public PlaylistDAO(Connection conn) {
         this.conn = conn;        
     } 
-    
+    // inseri a tabela playlist uma playlist nova
     public void adicionarPlaylist(String nome, int usuarioId) throws SQLException{
         String sql = "INSERT INTO Playlist (nome, usuario_id) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -28,8 +29,9 @@ public class PlaylistDAO {
             stmt.executeUpdate();
         }
     }
+    // remove da tabela playlist uma playlist
     public void removerPlaylist(String nome, int usuarioId) throws SQLException {
-        // Primeiro, obtenha o ID da playlist
+        // primeiro, opegamos o id da playlist
         String obterIdSql = "SELECT id FROM Playlist WHERE nome = ? AND usuario_id = ?";
         try (PreparedStatement obterIdStmt = conn.prepareStatement(obterIdSql)) {
             obterIdStmt.setString(1, nome);
@@ -39,14 +41,14 @@ public class PlaylistDAO {
             if (rs.next()) {
                 int playlistId = rs.getInt("id");
 
-                // Remover músicas associadas
+                // agora, removendo as musicas associadas a playlist
                 String removerMusicasSql = "DELETE FROM MusicaPlaylist WHERE playlist_id = ?";
                 try (PreparedStatement removerMusicasStmt = conn.prepareStatement(removerMusicasSql)) {
                     removerMusicasStmt.setInt(1, playlistId);
                     removerMusicasStmt.executeUpdate();
                 }
 
-                // Agora remover a playlist
+                // por fim, removendo a playlist
                 String removerPlaylistSql = "DELETE FROM Playlist WHERE id = ?";
                 try (PreparedStatement removerPlaylistStmt = conn.prepareStatement(removerPlaylistSql)) {
                     removerPlaylistStmt.setInt(1, playlistId);
@@ -60,7 +62,7 @@ public class PlaylistDAO {
             }
         }
     }
-    
+    //metodo que busca uma playlist
     public String buscarPlaylist(int usuarioId) {
         StringBuilder resultado = new StringBuilder();
 
@@ -84,7 +86,7 @@ public class PlaylistDAO {
                 String nomePlaylist = rs.getString("playlist_nome");
                 String tituloMusica = rs.getString("musica_titulo");
 
-                // Se a playlist mudou, imprimimos o cabeçalho dela
+                // se a playlist mudou, mostramos o que tem dentro dela
                 if (idPlaylist != playlistAtual) {
                     if (playlistAtual != -1) {
                         resultado.append("\n");
@@ -94,7 +96,7 @@ public class PlaylistDAO {
                     playlistAtual = idPlaylist;
                 }
 
-                // Adiciona a música, se houver
+                // adiciona a música na playlist, se houver
                 if (tituloMusica != null) {
                     resultado.append("     ").append(tituloMusica).append("\n");
                 } else {
@@ -116,7 +118,7 @@ public class PlaylistDAO {
     
     public void adicionarMusicaNaPlaylistPorNomes(String nomePlaylist, 
             String tituloMusica, int usuarioId) throws SQLException {
-        // Buscar ID da playlist
+        // buscando o id da playlist
         String sqlPlaylist = "SELECT id FROM Playlist WHERE nome = ? AND usuario_id = ?";
         PreparedStatement stmtPlaylist = conn.prepareStatement(sqlPlaylist);
         stmtPlaylist.setString(1, nomePlaylist);
@@ -128,7 +130,7 @@ public class PlaylistDAO {
         }
         int playlistId = rsPlaylist.getInt("id");
 
-        // Buscar ID da música
+        // buscando o id da música
         String sqlMusica = "SELECT id FROM Musica WHERE titulo = ?";
         PreparedStatement stmtMusica = conn.prepareStatement(sqlMusica);
         stmtMusica.setString(1, tituloMusica);
@@ -139,14 +141,14 @@ public class PlaylistDAO {
         }
         int musicaId = rsMusica.getInt("id");
 
-        // Inserir na MusicaPlaylist
+        // colocando na tabela de MusicaPlaylist
         String sqlInsert = "INSERT INTO MusicaPlaylist (playlist_id, musica_id) VALUES (?, ?)";
         PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
         stmtInsert.setInt(1, playlistId);
         stmtInsert.setInt(2, musicaId);
         stmtInsert.executeUpdate();
     }
-    
+    //remove a musica da playlist
     public boolean removerMusicaDaPlaylistPorNomes(String nomePlaylist, 
                 String tituloMusica, int idUsuario) throws SQLException {
         String sql = """
@@ -170,7 +172,7 @@ public class PlaylistDAO {
             return linhasAfetadas > 0;
         }
     }
-    
+    // editando o nome da playlist desejada
     public boolean renomearPlaylist(String nomeAntigo, String nomeNovo,
                                     int idUsuario) throws SQLException {
     String sql = "UPDATE Playlist SET nome = ? WHERE nome = ? AND usuario_id = ?";
