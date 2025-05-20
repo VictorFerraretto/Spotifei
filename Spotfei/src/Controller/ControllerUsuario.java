@@ -18,6 +18,7 @@ import View.VisualizarEstatisticas;
 
 // Novo Controller para ajudar com os usuarios
 public class ControllerUsuario {
+    // linkando com as interfaces
     private ConsultarUsuarios view;
     private VisualizarEstatisticas view2;
     
@@ -72,7 +73,7 @@ public class ControllerUsuario {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    // mostra o total de usuarios que existem no banco
     public void mostrarTotalUsuarios() {
     try {
         Conexao conexao = new Conexao();
