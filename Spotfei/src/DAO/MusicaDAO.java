@@ -17,12 +17,13 @@ import java.util.List;
  * @author Gustavo
  */
 public class MusicaDAO {
+    //conexao com o bando de dados
     private Connection conn;
 
     public MusicaDAO(Connection conn) {
         this.conn = conn;
     }
-
+    //inserindo as musicas na tabela de Musicas do banco
     public void inserirMusica(String titulo, String genero, 
         LocalDate dataLancamento, int artistaId) throws SQLException {
         String sql = "INSERT INTO Musica (titulo, artista_id, genero, lancamento) "
@@ -34,7 +35,7 @@ public class MusicaDAO {
         ms.setDate(4, java.sql.Date.valueOf(dataLancamento));  // quarto o lancamento
         ms.executeUpdate();
    }
-   
+   // procurando as musicas
     public String procurarMusica(String musica) throws SQLException{
         StringBuilder resultado = new StringBuilder();
         String sql = "SELECT \n" +
@@ -103,7 +104,7 @@ public class MusicaDAO {
         return 0;
     }
     
-    
+    // usei o list aqui tbm
     public List<Musica> procurarMusicasParaHistorico(String titulo) throws SQLException {
         List<Musica> musicas = new ArrayList<>();
 
