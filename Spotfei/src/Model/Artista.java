@@ -12,7 +12,7 @@ public class Artista extends Pessoa{
     private int id_artista;
     private String nome_artistico;
     private String genero;
-
+    // construtor para o artista
     public Artista(int id_artista, String nome_artistico, String genero, int id, 
                     String nome, String email, String telefone) {
         super(id, nome, email, telefone);
