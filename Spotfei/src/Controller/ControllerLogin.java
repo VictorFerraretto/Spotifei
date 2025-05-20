@@ -20,12 +20,13 @@ import View.Login;
  * @author Victor
  */
 public class ControllerLogin {
+    // linkando com a interface de login
     private Login view;
     
     public ControllerLogin(Login view) {
         this.view = view;
     }
-    
+    // metodo para ver se o usuario existe no banco e o loga no spptfei
     public void loginUsuario() {
     
         String username = view.getTxt_usuario().getText();
