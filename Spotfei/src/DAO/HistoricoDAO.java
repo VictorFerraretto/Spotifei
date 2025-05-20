@@ -15,13 +15,14 @@ import java.sql.ResultSet;
  * @author Victor
  */
 public class HistoricoDAO {
+    //conexao com o banco de dados
     private Connection conn;
 
     public HistoricoDAO(Connection conn) {
         this.conn = conn;        
     }
     
-    
+    //metodo que insere na tabela de Historico de Busca as musicas buscadas
     public void adicionarBusca(int usuarioId, int musicaId) throws SQLException {
         String sql = "INSERT INTO HistoricoBuscas (usuario_id, musica_id) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -30,7 +31,7 @@ public class HistoricoDAO {
             stmt.executeUpdate();
         }
     }
-    
+    // metodo que seleciona as ultimas musicas buscadas
     public String buscarUltimasBuscas(int usuarioId) throws SQLException {
         StringBuilder resultado = new StringBuilder();
 
@@ -58,6 +59,7 @@ public class HistoricoDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                // mostrando informações da musica 
                 resultado.append("Título: ").append(rs.getString("titulo")).append("\n")
                          .append("Artista: ").append(rs.getString("artista")).append("\n")
                          .append("Gênero: ").append(rs.getString("genero")).append("\n")
