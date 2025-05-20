@@ -8,6 +8,9 @@ package Model;
  *
  * @author unifvnovais
  */
+// usamos essa classe para pegar 
+//o nome do usuario que esta 
+//logoado no sistema
 public class Sessao {
     private static Sessao instancia;
     private Usuario usuarioLogado;
