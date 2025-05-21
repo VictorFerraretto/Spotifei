@@ -70,9 +70,9 @@ Atenção:
 
 Exemplos de login após execução do script:
 
-• Usuário comum: maria_user / senha456
+• Usuário comum: maria / senha456
 
-• Administrador: carlos_admin / senha123
+• Administrador: carlosAd / senha123
 
 ### Funcionalidades para Usuários Comuns
 
