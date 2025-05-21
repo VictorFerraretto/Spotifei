@@ -86,11 +86,11 @@ INSERT INTO Pessoa (nome, email, telefone) VALUES
 ('Lucas Pereira', 'lucas@email.com', '955555555');  -- ID 5
 
 INSERT INTO Usuario (pessoa_id, username, senha, tipo_usuario) VALUES
-(1, 'carlos_admin', 'senha123', 'admin'),
-(2, 'maria_user', 'senha456', 'comum'),
-(3, 'joao_user', 'senha789', 'comum'),
-(4, 'ana_user', 'senha321', 'comum'),
-(5, 'lucas_user', 'senha654', 'comum');
+(1, 'carlosAd', 'senha123', 'admin'),
+(2, 'maria', 'senha456', 'comum'),
+(3, 'joao', 'senha789', 'comum'),
+(4, 'ana', 'senha321', 'comum'),
+(5, 'lucas', 'senha654', 'comum');
 
 
 INSERT INTO Pessoa (nome, email, telefone) VALUES
