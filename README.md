@@ -36,7 +36,7 @@ Antes de rodar o Spotifei, certifique-se de que os seguintes softwares estejam i
 
 ### Clonagem do repositório
 
-• Clone ou baixe o repositório diretamente do GitHub:
+• Clone ou baixe o repositório diretamente do GitHub
 
 • Abra o projeto no NetBeans
 
